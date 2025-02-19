@@ -205,6 +205,7 @@
         form.addEventListener("reset", handleReset);
 
         function handleReset() {
+            console.log("Reset button clicked.");
             bmiText.textContent = 0;
             bmiText.className = "";
             descText.textContent = "N/A";
@@ -212,13 +213,16 @@
 
         function handleSubmit(e) {
             e.preventDefault();
-
+            console.log("Form submitted.");
             // const weight = parseFloat(form.weight.value);
             // const height = parseFloat(form.height.value);
             const weight = parseFloat(document.getElementById("weight").value);
             const height = parseFloat(document.getElementById("height").value) / 100;
+            console.log("Entered Weight:", weight);
+        console.log("Entered Height (in meters):", height);
 
             if (isNaN(weight) || isNaN(height) || weight <= 0 || height <= 0) {
+                console.error("Invalid input! Please enter a valid weight and height.");
                 alert("Please enter a valid weight and height");
                 return;
             }
@@ -226,7 +230,9 @@
             // const heightInMeters = height / 100; // cm -> m
             // const bmi = weight / Math.pow(heightInMeters, 2);
             const bmi = weight / (height * height);
+            console.log("Calculated BMI:", bmi);
             const desc = interpretBMI(bmi);
+            console.log("BMI Category:", desc);
 
             bmiText.textContent = bmi.toFixed(2);
             bmiText.className = desc;
@@ -234,6 +240,7 @@
         }
 
         function interpretBMI(bmi) {
+            console.log("Interpreting BMI:", bmi);
             if (bmi < 18.5) {
                 return "underweight";
             } else if (bmi < 25) {
